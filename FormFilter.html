@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>Forms Excercise</title>
+	</head>
+
+	<body>
+		<form action="{{ url_for('showForm')}}" method="post">
+			<div>
+			<h1>Find a Recommendation</h1>
+			<label for="rest_name"> Restaurant Name: </label>
+			<input type="text" name="rest_name" id="rest_name" placeholder="Restaurant Name" required>
+			</div>
+
+			<div>
+
+			<label for="zipcode">Zip Code:</label>
+			<input type="text" name="zipcode" id="zipcode" placeholder="Zip Code" required>
+			</div>
+
+			<!-- I agree to terms and conditions check box -->
+			<div>
+			I agree to the terms and conditions
+			<input type="checkbox" name="terms" required> 
+			</div>
+
+			<div><input type="submit"></div>
+		</form>
+	</body>
+</html>
