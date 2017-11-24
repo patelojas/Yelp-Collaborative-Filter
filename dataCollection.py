@@ -20,13 +20,13 @@ def showForm():
     if request.method == 'POST':
         name=request.form['rest_name']
         zip_code = request.form['zipcode']
-        businesses = pd.read_csv("C:/Users/Mallory/Documents/yelpData/business.csv")
+        businesses = pd.read_csv('/Users/ojaspatel/Documents/Yelp/dataset/business.csv')
         spec_businesses = businesses[(businesses['postal_code'] == zip_code) & (businesses['name'] == name)]
         chipotle = spec_businesses.iloc[0, :]
         chipotle_biz_id = chipotle['business_id']
         chipotle_lattitude = chipotle['latitude']
         chipotle_longitude = chipotle['longitude']
-        reviews = pd.read_csv("C:/Users/Mallory/Documents/yelpData/review.csv")
+        reviews = pd.read_csv('/Users/ojaspatel/Documents/Yelp/dataset/review.csv')
         chipotle_reviews = reviews.loc[reviews['business_id'] == chipotle_biz_id]
         closeBy=businesses[(businesses['latitude']>=chipotle_lattitude-1) & (businesses['latitude']<=chipotle_lattitude+1) & (businesses['longitude']>=chipotle_longitude-1) & (businesses['longitude']<=chipotle_longitude+1)]
         good_reviews = chipotle_reviews.loc[(chipotle_reviews['stars'] == 5)]
@@ -35,8 +35,8 @@ def showForm():
         all_good_reviews = reviews.loc[(reviews['user_id'].isin(users_who_liked)) & (reviews['stars'] == 5)]
         all_good_reviews_biz_id = set(all_good_reviews['business_id'])
         all_good_names1 = businesses.loc[(businesses['business_id'].isin(all_good_reviews_biz_id)) & (businesses['business_id'].isin(closeBy_biz_id))]
-        all_good_names3 = set(all_good_names1['name'])
-        print (all_good_names3)
+        all_good_names2 = set(all_good_names1['name'])
+        return render_template('output.html', output=all_good_names2)
 
 
         #compiles a list of all the business ID
@@ -46,10 +46,10 @@ def showForm():
 
 
         #uses the business ids from the all good names list
-        for x in all_good_names_biz_id:
-            stars_id=reviews.iloc(reviews['business_id'] == x)
-            stars=set(float(stars_id['stars']) & stars_id['business_id'])
-            print(stars)
+        #for x in all_good_names_biz_id:
+        #    stars_id=reviews.iloc(reviews['business_id'] == x)
+        #    stars=set(float(stars_id['stars']) & stars_id['business_id'])
+        #    print(stars)
 
         #     average=(x_stars.sum(axis=0)/len(x_stars))
         #     if average > max:
@@ -61,7 +61,7 @@ def showForm():
         # print(three_business)
 
         if form.validate():
-        	#renders a template that returns the output
+            #renders a template that returns the output
              #Save the comment here.
             flash('Hello')
         else:
