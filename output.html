@@ -2,8 +2,10 @@
 	<head>
 		<title>Recommendations</title>
 	</head>
-	
+
 	<body>
-		<p>{{ output }}</p>
+		<form action="{{ url_for('showForm') }}" method="post">
+    	<p>{{ output }}</p>
+		</form>
 	</body>
 </html>

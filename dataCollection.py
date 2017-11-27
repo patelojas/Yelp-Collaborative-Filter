@@ -21,6 +21,8 @@ def showForm():
         name=request.form['rest_name']
         zip_code = request.form['zipcode']
         businesses = pd.read_csv('/Users/ojaspatel/Documents/Yelp/dataset/business.csv')
+        #restaurants = businesses['categories'][0] == 'Food'
+        #print restaurants
         spec_businesses = businesses[(businesses['postal_code'] == zip_code) & (businesses['name'] == name)]
         chipotle = spec_businesses.iloc[0, :]
         chipotle_biz_id = chipotle['business_id']
@@ -28,11 +30,11 @@ def showForm():
         chipotle_longitude = chipotle['longitude']
         reviews = pd.read_csv('/Users/ojaspatel/Documents/Yelp/dataset/review.csv')
         chipotle_reviews = reviews.loc[reviews['business_id'] == chipotle_biz_id]
-        closeBy=businesses[(businesses['latitude']>=chipotle_lattitude-1) & (businesses['latitude']<=chipotle_lattitude+1) & (businesses['longitude']>=chipotle_longitude-1) & (businesses['longitude']<=chipotle_longitude+1)]
+        closeBy=businesses[(businesses['latitude']>=chipotle_lattitude-.5) & (businesses['latitude']<=chipotle_lattitude+.5) & (businesses['longitude']>=chipotle_longitude-.5) & (businesses['longitude']<=chipotle_longitude+.5)]
         good_reviews = chipotle_reviews.loc[(chipotle_reviews['stars'] == 5)]
         closeBy_biz_id = closeBy['business_id']
         users_who_liked = set(good_reviews['user_id'])
-        all_good_reviews = reviews.loc[(reviews['user_id'].isin(users_who_liked)) & (reviews['stars'] == 5)]
+        all_good_reviews = reviews.loc[(reviews['user_id'].isin(users_who_liked)) & (reviews['stars'] >= 5)]
         all_good_reviews_biz_id = set(all_good_reviews['business_id'])
         all_good_names1 = businesses.loc[(businesses['business_id'].isin(all_good_reviews_biz_id)) & (businesses['business_id'].isin(closeBy_biz_id))]
         all_good_names2 = set(all_good_names1['name'])
