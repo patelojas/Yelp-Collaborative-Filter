@@ -38,7 +38,10 @@ def showForm():
         all_good_reviews_biz_id = set(all_good_reviews['business_id'])
         all_good_names1 = businesses.loc[(businesses['business_id'].isin(all_good_reviews_biz_id)) & (businesses['business_id'].isin(closeBy_biz_id))]
         all_good_names2 = set(all_good_names1['name'])
-        return render_template('output.html', output=all_good_names2)
+        names = []
+        for x in all_good_names2:
+            names.append(x)
+        return render_template('output.html', output=names)
 
 
         #compiles a list of all the business ID
