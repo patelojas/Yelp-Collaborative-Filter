@@ -21,7 +21,7 @@ def showForm():
         name=request.form['rest_name']
         zip_code = request.form['zipcode']
         businesses = pd.read_csv('/Users/ojaspatel/Documents/Yelp/dataset/business.csv')
-        restaurants = businesses[businesses['categories'].str.contains('Food')]
+        restaurants = businesses[(businesses['categories'].str.contains('Food')) or (businesses['categories'].str.contains('Bars')) or (businesses['categories'].str.contains('Pubs'))]
         spec_businesses = restaurants[(restaurants['postal_code'] == zip_code) & (restaurants['name'] == name)]
         chipotle = spec_businesses.iloc[0, :]
         chipotle_biz_id = chipotle['business_id']
