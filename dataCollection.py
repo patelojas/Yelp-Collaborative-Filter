@@ -36,7 +36,6 @@ def showForm():
         all_good_reviews = reviews.loc[(reviews['user_id'].isin(users_who_liked)) & (reviews['stars'] >= 5)]
         all_good_reviews_biz_id = set(all_good_reviews['business_id'])
         all_good_names1 = restaurants.loc[(restaurants['business_id'].isin(all_good_reviews_biz_id)) & (restaurants['business_id'].isin(closeBy_biz_id))]
-        print all_good_names1
 
 
         #compiles a list of all the business ID

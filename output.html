@@ -1,13 +1,25 @@
 <html>
-	<head>
-		<title>Recommendations</title>
-	</head>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<title>Recommendations</title>
+</head>
 
-	<body>
+<body>
+	<center>
 		<form action="{{ url_for('showForm') }}" method="post">
-    	<p>{{ output[0] }}</p>
-    	<p>{{ output[1] }}</p>
-    	<p>{{ output[2] }}</p>
+			<div class="alert alert-primary" role="alert">
+				{{ output[0] }}
+			</div>
+
+			<div class="alert alert-primary" role="alert">
+				{{ output[1] }}
+			</div>
+
+			<div class="alert alert-primary" role="alert">
+				{{ output[2] }}
+			</div>
+
 		</form>
-	</body>
+	</center>
+</body>
 </html>
