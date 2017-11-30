@@ -56,11 +56,17 @@ def showForm():
         # three_business_name=set(three_business_loc['name'])
         # print(three_business)
 
+        sponsors = ["Subway", "McDonald's", "Burger King", "Panda Express", "Taco Bell"]
         all_good_names2 = set(all_good_names1['name'])
         names = []
+        shuffle(sponsors)
         for x in all_good_names2:
             names.append(x)
         shuffle(names)
+<<<<<<< HEAD
+        names[0] = sponsors[0]
+=======
+>>>>>>> 47c2a967ec55947a249b6f2e614505d427d2f246
         return render_template('output.html', output=names)
 
 

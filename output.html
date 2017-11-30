@@ -1,24 +1,90 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed" rel="stylesheet">
 	<title>Recommendations</title>
 </head>
 
-<body>
+<style>
+body{
+	background-color: #c4f8ff;
+	margin: 15;
+}
+
+h1{
+	font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.results{
+	margin: 50 250 50 250;
+	
+}
+
+#backBtn{
+	margin-top: 15;
+}
+
+
+
+</style>
+
+<script>
+	function myFunction() {
+		var x = document.getElementById("myDIV");
+		if (x.style.display === "none") {
+			x.style.display = "block";
+		} else {
+			x.style.display = "none";
+		}
+	}
+
+</script>
+
+
+<body background=#FF6961>
 	<center>
-		<form action="{{ url_for('showForm') }}" method="post">
+		<h1>Your Recommendations!</h1>
+		<div class="results">
+			<form action="{{ url_for('showForm') }}" method="post">
+
+				<div class="alert alert-success" role="alert">
+					<strong>Sponsored: </strong> {{ output[0] }}
+				</div>
+
+				<div class="alert alert-primary" role="alert">
+					<strong>1:</strong> {{ output[1] }}
+				</div>
+
+				<div class="alert alert-primary" role="alert">
+					<strong>2:</strong> {{ output[2] }}
+				</div>
+
+				<div class="alert alert-primary" role="alert">
+					<strong>3:</strong> {{ output[3] }}
+				</div>
+
+			</form>
+		</div>
+
+		<button id="moreBtn" class= "btn btn-primary" onclick="myFunction()">Show 3 More</button>
+
+		<div id="myDIV" class="results">
 			<div class="alert alert-primary" role="alert">
-				{{ output[0] }}
+				<strong>4:</strong> {{ output[4] }}
 			</div>
 
 			<div class="alert alert-primary" role="alert">
-				{{ output[1] }}
+				<strong>5:</strong> {{ output[5] }}
 			</div>
 
 			<div class="alert alert-primary" role="alert">
-				{{ output[2] }}
+				<strong>6:</strong> {{ output[6] }}
 			</div>
 
+		</div>
+
+		<form>
+			<button class="btn btn-primary" onclick="history.back()" id="backBtn">Enter a New Restaurant!</button>
 		</form>
 	</center>
 </body>
