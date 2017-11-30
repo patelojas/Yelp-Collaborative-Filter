@@ -2,7 +2,7 @@ from flask import Flask, render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import pandas as pd
 import numpy as np
-
+from random import shuffle
 # App config.
 DEBUG = True
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def showForm():
         name=request.form['rest_name']
         zip_code = request.form['zipcode']
         businesses = pd.read_csv('/Users/ojaspatel/Documents/Yelp/dataset/business.csv')
-        restaurants = businesses[(businesses['categories'].str.contains('Food')) or (businesses['categories'].str.contains('Bars')) or (businesses['categories'].str.contains('Pubs'))]
+        restaurants = businesses[(businesses['categories'].str.contains('Restaurants'))]
         spec_businesses = restaurants[(restaurants['postal_code'] == zip_code) & (restaurants['name'] == name)]
         chipotle = spec_businesses.iloc[0, :]
         chipotle_biz_id = chipotle['business_id']
@@ -30,16 +30,13 @@ def showForm():
         reviews = pd.read_csv('/Users/ojaspatel/Documents/Yelp/dataset/review.csv')
         chipotle_reviews = reviews.loc[reviews['business_id'] == chipotle_biz_id]
         closeBy=restaurants[(restaurants['latitude']>=chipotle_lattitude-.5) & (restaurants['latitude']<=chipotle_lattitude+.5) & (restaurants['longitude']>=chipotle_longitude-.5) & (restaurants['longitude']<=chipotle_longitude+.5)]
-        good_reviews = chipotle_reviews.loc[(chipotle_reviews['stars'] == 5)]
+        good_reviews = chipotle_reviews.loc[(chipotle_reviews['stars'] == 4)]
         closeBy_biz_id = closeBy['business_id']
         users_who_liked = set(good_reviews['user_id'])
-        all_good_reviews = reviews.loc[(reviews['user_id'].isin(users_who_liked)) & (reviews['stars'] >= 5)]
+        all_good_reviews = reviews.loc[(reviews['user_id'].isin(users_who_liked)) & (reviews['stars'] >= 4)]
         all_good_reviews_biz_id = set(all_good_reviews['business_id'])
         all_good_names1 = restaurants.loc[(restaurants['business_id'].isin(all_good_reviews_biz_id)) & (restaurants['business_id'].isin(closeBy_biz_id))]
 
-
-        #compiles a list of all the business ID
-        all_good_names_biz_id=set(all_good_names1['business_id'])
         #max 3 ??
         #avegStars-list, sort, print out the 3 largest
 
@@ -63,6 +60,7 @@ def showForm():
         names = []
         for x in all_good_names2:
             names.append(x)
+        shuffle(names)
         return render_template('output.html', output=names)
 
 
