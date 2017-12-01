@@ -56,18 +56,41 @@ def showForm():
         # three_business_name=set(three_business_loc['name'])
         # print(three_business)
 
-        sponsors = ["Subway", "McDonald's", "Burger King", "Panda Express", "Taco Bell"]
+        sponsors = ["Subway", "McDonald's", "Burger King", "Panda Express", "Taco Bell", "Chik-Fil-A"]
+        shuffle(sponsors)
+
+        all_good_addresses = set(all_good_names1['address'])
+        address_list = []
+        for x in all_good_addresses:
+            address_list.append(x)
+
         all_good_names2 = set(all_good_names1['name'])
         names = []
-        shuffle(sponsors)
         for x in all_good_names2:
             names.append(x)
+
+        all_good_zipcodes = set(all_good_names1['postal_code'])
+        zipcodes = []
+        for x in all_good_zipcodes:
+            zipcodes.append(x)
+
+        all_good_cities = set(all_good_names1['city'])
+        cities = []
+        for x in all_good_cities:
+            cities.append(x)
+
+        all_good_states = set(all_good_names1['state'])
+        states = []
+        for x in all_good_states:
+            states.append(x)
+
         shuffle(names)
-<<<<<<< HEAD
-        names[0] = sponsors[0]
-=======
->>>>>>> 47c2a967ec55947a249b6f2e614505d427d2f246
-        return render_template('output.html', output=names)
+        shuffle(address_list)
+        shuffle(zipcodes)
+        shuffle(cities)
+        shuffle(states)
+
+        return render_template('output.html', output=names, sponsors=sponsors, address=address_list, zips=zipcodes, cities=cities, states=states)
 
 
         if form.validate():

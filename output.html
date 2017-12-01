@@ -48,19 +48,22 @@ h1{
 			<form action="{{ url_for('showForm') }}" method="post">
 
 				<div class="alert alert-success" role="alert">
-					<strong>Sponsored: </strong> {{ output[0] }}
+					<strong>Sponsored: </strong> {{ sponsors[0] }}
 				</div>
 
 				<div class="alert alert-primary" role="alert">
-					<strong>1:</strong> {{ output[1] }}
+					<strong>1:</strong> {{ output[0] }}
+					<strong>Address: </strong> {{address[0]}} {{cities[0]}}, {{states[0]}} {{zips[0]}}
 				</div>
 
 				<div class="alert alert-primary" role="alert">
-					<strong>2:</strong> {{ output[2] }}
+					<strong>2:</strong> {{ output[1] }}
+					<strong>Address: </strong> {{address[1]}} {{cities[1]}}, {{states[1]}} {{zips[1]}}
 				</div>
 
 				<div class="alert alert-primary" role="alert">
-					<strong>3:</strong> {{ output[3] }}
+					<strong>3:</strong> {{ output[2] }}
+					<strong>Address: </strong> {{address[2]}} {{cities[2]}}, {{states[2]}} {{zips[2]}}
 				</div>
 
 			</form>
@@ -68,17 +71,20 @@ h1{
 
 		<button id="moreBtn" class= "btn btn-primary" onclick="myFunction()">Show 3 More</button>
 
-		<div id="myDIV" class="results">
+		<div id="myDIV" class="results" style="display:none;">
 			<div class="alert alert-primary" role="alert">
-				<strong>4:</strong> {{ output[4] }}
+				<strong>4:</strong> {{ output[3] }}
+				<strong>Address: </strong> {{address[3]}} {{cities[3]}}, {{states[3]}} {{zips[3]}}
 			</div>
 
 			<div class="alert alert-primary" role="alert">
-				<strong>5:</strong> {{ output[5] }}
+				<strong>5:</strong> {{ output[4] }}
+				<strong>Address: </strong> {{address[4]}} {{cities[4]}}, {{states[4]}} {{zips[4]}}
 			</div>
 
 			<div class="alert alert-primary" role="alert">
-				<strong>6:</strong> {{ output[6] }}
+				<strong>6: </strong> {{output[5]}}
+				<strong>Address: </strong> {{address[5]}} {{cities[5]}}, {{states[5]}} {{zips[5]}}
 			</div>
 
 		</div>
